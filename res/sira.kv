@@ -3,11 +3,22 @@
 
 AdvancedTextInput:
     id: commandText
+    text: app.config.get("Text", "username") + app.config.get("Text", "cmd_identifier")
+    protected_len: len(app.protected_text)
     background_color: [0, 0, 0, 1]
     focus: True
+    font_size: app.config.get("Text", "font_size")
     cursor_color: [1, 1, 1, 1]
     foreground_color: [1, 1, 1, 1]
     padding: [20, 20, 20, 20]
+    font_name: app._get_font_path(app.config.get("Text", "font_name"))
     on_text_validate: app._on_command(self)
     on_tab: app._on_tab(self)
     on_ctrl_c: app._stop_interaction(self)
+    on_left_option: app._on_switch_option(self, "left")
+    on_next_options: app._on_display_options(self, "next", app.option)
+    on_prev_options: app._on_display_options(self, "prev", app.option)
+    on_reduce_option: app._on_reduce_option(self)
+    on_right_option: app._on_switch_option(self, "right")
+    on_space: app._on_space(self)
+    on_stop_completion: app._stop_completion(self)

@@ -1,0 +1,14 @@
+{   
+     "fields": {
+        "project": {
+            "key": "TEST"
+        },
+        "summary": "somethingswrong",
+        "issuetype": {
+            "name": "Bug"
+        },
+        "assignee": {
+            "name": "ysg"
+        }
+    }
+}

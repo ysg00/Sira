@@ -7,10 +7,19 @@
         "key": "cmd_identifier"
     },
     {
-        "type": "numeric",
+        "type": "options",
+        "options": ["10", "11", "12", "14", "16", "17", "18", "20"],
         "title": "Font Size",
         "desc": "Choose the font size",
         "section": "Text",
         "key": "font_size"
+    },
+    {
+        "type": "options",
+        "options": ["Arial", "Cour", "DejaVu Sans Mono", "Menlo", "Monaco", "Times New Roman"],
+        "title": "Font",
+        "desc": "Choose the font name",
+        "section": "Text",
+        "key": "font_name"
     }
 ]

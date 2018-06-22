@@ -140,8 +140,13 @@ venv.bak/
 ehthumbs.db
 Thumbs.db
 
-# project file
-cookie.txt
+# project file #
+################
 .vscode/
 username.txt
 src/sira.ini
+selfnote.md
+TSuit.py
+TTest.py
+cookie.txt
+testfolder

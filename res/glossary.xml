@@ -8,7 +8,7 @@
     </keyword>
     <keyword name="sira">
         <keyword name="login">
-            <required name="user_name">
+            <required name="username">
                 <required name="pwd">
                     <function multi-thread="True" object="login" name="login" para="user pwd"/>
                 </required>
@@ -18,7 +18,7 @@
             <interactive>User name:</interactive>
         </keyword>
         <keyword name="logout">
-            <function multi-thread="False" object="login" name="logout" />
+            <function multi-thread="True" object="login" name="logout" />
         </keyword>
         <keyword name="query">
             <interactive>-number -project -type -assignee -sprint</interactive>
@@ -30,11 +30,11 @@
             </keyword>
             <keyword name="project">
                 <interactive>project:</interactive>
-                <required name="project_name">
+                <required name="project">
                     <interactive>-type -assignee -sprint</interactive>
                     <keyword name="type">
                         <interactive>type:</interactive>
-                        <required name="type">
+                        <required name="issuetype">
                             <function multi-thread="True" object="query" name="query_project_type" para="project_name type"/>
                         </required>
                     </keyword>
@@ -54,22 +54,52 @@
             </keyword>
             <keyword name="type">
                 <interactive>type:</interactive>
-                <required name="type">
+                <required name="issuetype">
                     <function multi-thread="True" object="query" name="query_type" para="type"/>
                 </required>
             </keyword>
             <keyword name="assignee">
                 <interactive>assignee:</interactive>
-                <required name="assignee_name">
+                <required name="assignee">
                     <function multi-thread="True" object="query" name="query_assignee" para="assignee_name"/>
                 </required>
             </keyword>
             <keyword name="sprint">
                 <interactive>sprint:</interactive>
-                <required name="sprint_name">
+                <required name="sprint">
                     <function multi-thread="True" object="query" name="query_sprint" para="sprint_name"/>
                 </required>
             </keyword>
+        </keyword>
+        <keyword name="create">
+            <interactive>project(*):</interactive>
+                <required name="project">
+                    <interactive>issuetype(*):</interactive>
+                    <required name="issuetype">
+                        <interactive>summary(*):</interactive>
+                        <optional name="summary">
+                            <interactive>reporter:</interactive>
+                            <optional name="assignee">
+                                <interactive>priority:</interactive>
+                                <optional name="priority">
+                                    <interactive>labels:</interactive>
+                                    <optional name="label">
+                                        <interactive>description:</interactive>
+                                        <optional name="description">
+                                            <interactive>assignee:</interactive>
+                                            <optional name="assignee">
+                                                <interactive>sprint:</interactive>
+                                                <optional name="sprint">
+                                                    <function multi-thread="True" object="issueOps" name="issue_create" para="*"/>
+                                                </optional>
+                                            </optional>
+                                        </optional>
+                                    </optional>
+                                </optional>
+                            </optional>
+                        </optional>
+                    </required>
+                </required>
         </keyword>
     </keyword>
 </cmd>
