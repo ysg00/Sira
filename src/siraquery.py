@@ -1,6 +1,8 @@
 from argparse import ArgumentParser
 from func import query_board, query_issue, query_project
 
+from sys import stdin, stdout, stderr
+
 issue_opts_list = ["assignee", "creator", "id", "key", "label", "priority",
                    "reporter", "type", "watcher"]
 
@@ -53,6 +55,15 @@ def build_parser():
             dest=opt
         )
     issue_opts["id"].type = int
+    issue.add_argument(
+        "constraint",
+        action="store",
+        nargs="?",
+        default=None,
+        type=str,
+        help="TODO",
+        metavar="CONSTR"
+    )
 
     # add key in board
     board.add_argument(
@@ -89,8 +100,6 @@ def build_parser():
     return query
 
 
-
-
 def main():
     parser = build_parser()
     namespace = parser.parse_args()
@@ -99,16 +108,17 @@ def main():
         parser.print_help()
         return
     if namespace.sub_command == "issue":
-        jql = ""
         kwargs = vars(namespace)
+        jql = kwargs["constraint"] if kwargs["constraint"] else ""
         for element in kwargs:
             value = "currentUser()"\
                     if element in user_opts and kwargs[element] == "mine"\
                     else kwargs[element]
-            if element not in ("sub_command", "order", "limit") and value:
+            if element not in (
+                    "sub_command", "order", "limit", "constraint") and value:
                 jql += " and {} = {}".format(element, value) if jql\
                        else "{} = {}".format(element, value)
-        kwargs["constaint"] = jql
+        kwargs["constraint"] = jql
         print(query_issue(**kwargs))
     elif namespace.sub_command == "project":
         print(query_project(**vars(namespace)))
