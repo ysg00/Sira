@@ -117,9 +117,6 @@ class glob():
         except KeyError:
             return defValue
 
-
-
-
 def read_cookie():
     if glob_dic.get_value('cookie', '') == '':
         try:
